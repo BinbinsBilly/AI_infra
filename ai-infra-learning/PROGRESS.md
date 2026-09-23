@@ -2,7 +2,7 @@
 
 ## 当前状态
 - 阶段: 1/3 — llama.cpp 源码 × 大模型原理
-- 位置: Week 1 · Day 3 ✅ 已完成
+- 位置: Week 1 · Day 4 ✅ 已完成
 - 最近学习: 2026-09-22
 
 ## 已完成
@@ -10,9 +10,10 @@
 - [x] W1D2: Self-Attention 细节 (QKV 投影、缩放、causal mask、MHA→MQA→GQA) + numpy 手写验证
 - [x] W1D2 追加答疑: 多头切分方式、KV cache 显存公式、n_heads vs d_head、GQA 下 K/V 总维度
 - [x] W1D3: RoPE 旋转位置编码 (配对旋转、复数视角、相对性恒等式、外推性与 NTK/YaRN) + numpy 手写验证
+- [x] W1D4: RMSNorm 与 SwiGLU (为何去均值、三投影形状、d_ff=8/3·d_model 参数平衡、silu 门控) + numpy 手写验证
 
 ## 下次计划
-- [ ] W1D4: RMSNorm 与 SwiGLU (为何去均值、gate/up/down 投影形状) — 全程带 shape 标注 + 矩阵图
+- [ ] W1D5: 词表与 tokenizer (BPE、SentencePiece、llama3 merged BPE) — 用 tiktoken 观察 tokenize 结果
 
 ## 已解答疑问
 - [x] 为什么 Q 要重算而 KV 可以缓存? → Q 是提问每次不同; K/V 只依赖自身输入, 建好不变
@@ -30,7 +31,10 @@
 ## 实验记录
 - 2026-09-21: numpy attention 与 torch.scaled_dot_product_attention 对照, 最大误差 8e-8; causal mask 上三角权重为 0 验证通过 (attention_numpy.py)
 - 2026-09-22: numpy RoPE 验证: 位置0不旋转、相对性恒等式 |lhs-rhs|=0、旋转保长 (rope_numpy.py)
+- 2026-09-22: numpy RMSNorm+SwiGLU 验证: shape 链、gamma=1 时 RMS≈1、RMSNorm 不平移均值 (输出均值0.59)、silu 最小 -0.278、参数量平衡 135.3M vs 134.2M (norm_mlp_numpy.py)
 
 ## 作业
 - [ ] W1D1: 手画 LLaMA block 数据流图 (不参考截图)
-- [ ] 自查: 默写 KV cache 显存公式, 并手算 LLaMA-3 8B (GQA, n_layers=32, n_heads=32, n_kv=8, d_head=128, fp16, 4k ctx) 的 KV cache 大小 → 答案应为 512 MB
+- [x] 自查: 默写 KV cache 显存公式, 手算 LLaMA-3 8B → 512 MB ✓ (W1D3 已对答案)
+- [ ] W1D4 作业Q1: 手算 LLaMA-3 8B (d_model=4096, d_ff=14336) 单层 MLP 参数量及 32 层总量
+- [ ] W1D4 作业Q2: RMSNorm 去掉 γ 会失去什么自由度? 为何 γ 必须保留?
