@@ -2,7 +2,7 @@
 
 ## 当前状态
 - 阶段: 1/3 — llama.cpp 源码 × 大模型原理
-- 位置: Week 1 · Day 7 ✅ 动手完成, 综合测验待答
+- 位置: Week 1 ✅ 全部完成 (含 W1D7 测验), 准备进入 Week 2
 - 最近学习: 2026-09-25
 
 ## 已完成
@@ -16,10 +16,10 @@
 - [x] W1D6: 采样 Sampling (temperature/top-k/top-p/repetition penalty/greedy) + numpy 手写采样器
 - [x] W1D6 追加答疑: 词表扩大为何 embedding/lm_head 变大 (W_embed(vocab_size,d_model) 查找表、W_lm(d_model,vocab_size) 输出投影, 参数量=vocab_size×d_model); repetition penalty 为何在 logit 上 (与 temperature 合并、惩罚强度可预测)
 - [x] W1D7: Week 1 收官 — 全链路 shape 串讲 + 周检验 mini-LLaMA (2层/GQA/RoPE/SwiGLU/KV cache, greedy 生成) — cache 与全量重算输出一致, 投影 GEMM FLOPs 降为 1/14
-- [ ] W1D7 综合测验: 5 题待答 (shape/KV cache 一致性/RoPE/参数量手算/采样 pipeline)
+- [x] W1D7 综合测验: 5 题作答, Q1 shape 约定有误 (W_k 转置错、cache 形状混 d_model), Q2/Q3 ✓, Q4/Q5 跳过看答案; 重点补: (1) 矩阵 shape 约定 (in_dim, out_dim), (2) KV cache 形状 (seq, n_kv_heads, d_head) 不含 d_model
 
 ## 下次计划
-- [ ] W1D7 测验讲评 → 进入 Week 2: llama.cpp 上手 + ggml 张量库 (W2D1: 编译与运行)
+- [ ] W2D1: llama.cpp 编译与运行 — 需 clone llama.cpp 仓库, cmake 构建, 下载小 GGUF 模型, 跑通 llama-cli
 
 ## 已解答疑问
 - [x] 为什么 Q 要重算而 KV 可以缓存? → Q 是提问每次不同; K/V 只依赖自身输入, 建好不变
