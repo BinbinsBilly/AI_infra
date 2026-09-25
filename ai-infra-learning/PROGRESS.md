@@ -2,8 +2,8 @@
 
 ## 当前状态
 - 阶段: 1/3 — llama.cpp 源码 × 大模型原理
-- 位置: Week 1 · Day 5 ✅ 已完成
-- 最近学习: 2026-09-24
+- 位置: Week 1 · Day 6 ✅ 已完成
+- 最近学习: 2026-09-25
 
 ## 已完成
 - [x] W1D1: Transformer 架构总览 (prefill/decode、KV Cache 直觉、Decoder block 三件套)
@@ -13,9 +13,11 @@
 - [x] W1D4: RMSNorm 与 SwiGLU (为何去均值、三投影形状、d_ff=8/3·d_model 参数平衡、silu 门控) + numpy 手写验证
 - [x] W1D5: 词表与 Tokenizer (BPE 贪心最长匹配、SentencePiece BPE/Unigram、LLaMA-3 merged BPE 128k、byte fallback) + tiktoken 观察
 - [x] W1D5 追加答疑: Unigram LM 公式与 Viterbi (Dynamic Programming, 动态规划) 切分、EM (Expectation-Maximization, 期望最大化) 训练剪枝
+- [x] W1D6: 采样 Sampling (temperature/top-k/top-p/repetition penalty/greedy) + numpy 手写采样器
+- [x] W1D6 追加答疑: 词表扩大为何 embedding/lm_head 变大 (W_embed(vocab_size,d_model) 查找表、W_lm(d_model,vocab_size) 输出投影, 参数量=vocab_size×d_model); repetition penalty 为何在 logit 上 (与 temperature 合并、惩罚强度可预测)
 
 ## 下次计划
-- [ ] W1D6: 采样 (temperature、top-k、top-p、repetition penalty、greedy) — 手写 top-k/top-p 采样器
+- [ ] W1D7: Week 1 复习与测验 (LLaMA block 全链路串讲 + 综合测验)
 
 ## 已解答疑问
 - [x] 为什么 Q 要重算而 KV 可以缓存? → Q 是提问每次不同; K/V 只依赖自身输入, 建好不变
