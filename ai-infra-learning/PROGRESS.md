@@ -2,7 +2,7 @@
 
 ## 当前状态
 - 阶段: 1/3 — llama.cpp 源码 × 大模型原理
-- 位置: Week 1 · Day 6 ✅ 已完成
+- 位置: Week 1 · Day 7 ✅ 动手完成, 综合测验待答
 - 最近学习: 2026-09-25
 
 ## 已完成
@@ -15,9 +15,11 @@
 - [x] W1D5 追加答疑: Unigram LM 公式与 Viterbi (Dynamic Programming, 动态规划) 切分、EM (Expectation-Maximization, 期望最大化) 训练剪枝
 - [x] W1D6: 采样 Sampling (temperature/top-k/top-p/repetition penalty/greedy) + numpy 手写采样器
 - [x] W1D6 追加答疑: 词表扩大为何 embedding/lm_head 变大 (W_embed(vocab_size,d_model) 查找表、W_lm(d_model,vocab_size) 输出投影, 参数量=vocab_size×d_model); repetition penalty 为何在 logit 上 (与 temperature 合并、惩罚强度可预测)
+- [x] W1D7: Week 1 收官 — 全链路 shape 串讲 + 周检验 mini-LLaMA (2层/GQA/RoPE/SwiGLU/KV cache, greedy 生成) — cache 与全量重算输出一致, 投影 GEMM FLOPs 降为 1/14
+- [ ] W1D7 综合测验: 5 题待答 (shape/KV cache 一致性/RoPE/参数量手算/采样 pipeline)
 
 ## 下次计划
-- [ ] W1D7: Week 1 复习与测验 (LLaMA block 全链路串讲 + 综合测验)
+- [ ] W1D7 测验讲评 → 进入 Week 2: llama.cpp 上手 + ggml 张量库 (W2D1: 编译与运行)
 
 ## 已解答疑问
 - [x] 为什么 Q 要重算而 KV 可以缓存? → Q 是提问每次不同; K/V 只依赖自身输入, 建好不变
@@ -38,9 +40,10 @@
 - 2026-09-21: numpy attention 与 torch.scaled_dot_product_attention 对照, 最大误差 8e-8; causal mask 上三角权重为 0 验证通过 (attention_numpy.py)
 - 2026-09-22: numpy RoPE 验证: 位置0不旋转、相对性恒等式 |lhs-rhs|=0、旋转保长 (rope_numpy.py)
 - 2026-09-22: numpy RMSNorm+SwiGLU 验证: shape 链、gamma=1 时 RMS≈1、RMSNorm 不平移均值 (输出均值0.59)、silu 最小 -0.278、参数量平衡 135.3M vs 134.2M (norm_mlp_numpy.py)
+- 2026-09-25: mini_llama.py 周检验: 2层 GQA+RoPE+SwiGLU+KV cache, greedy 生成 24 tokens; 带cache与全量重算输出完全一致; 投影 GEMM FLOPs 89.21→6.31 MFLOPs (1/14); KV cache 29 tokens 仅 14.5 KB
 
 ## 作业
-- [ ] W1D1: 手画 LLaMA block 数据流图 (不参考截图)
+- [x] W1D1: 手画 LLaMA block 数据流图 → 已由 mini_llama.py 实现替代 (代码即数据流图的落地)
 - [x] 自查: 默写 KV cache 显存公式, 手算 LLaMA-3 8B → 512 MB ✓ (W1D3 已对答案)
-- [ ] W1D4 作业Q1: 手算 LLaMA-3 8B (d_model=4096, d_ff=14336) 单层 MLP 参数量及 32 层总量
-- [ ] W1D4 作业Q2: RMSNorm 去掉 γ 会失去什么自由度? 为何 γ 必须保留?
+- [x] W1D4 作业Q1: LLaMA-3 8B 单层 MLP = 3×(4096×14336) = 176.16M, ×32层 ≈ 5.64B (占 8B 模型 70%) ✓ (W1D5 session 已对答案)
+- [x] W1D4 作业Q2: 去掉 γ 失去逐维度缩放自由度, 所有维度被强制 RMS=1; γ 是 RMSNorm 唯一可学习参数必须保留 ✓ (W1D5 session 已对答案)
