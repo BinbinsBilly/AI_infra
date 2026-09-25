@@ -2,8 +2,8 @@
 
 ## 当前状态
 - 阶段: 1/3 — llama.cpp 源码 × 大模型原理
-- 位置: Week 1 · Day 4 ✅ 已完成
-- 最近学习: 2026-09-22
+- 位置: Week 1 · Day 5 ✅ 已完成
+- 最近学习: 2026-09-24
 
 ## 已完成
 - [x] W1D1: Transformer 架构总览 (prefill/decode、KV Cache 直觉、Decoder block 三件套)
@@ -11,9 +11,11 @@
 - [x] W1D2 追加答疑: 多头切分方式、KV cache 显存公式、n_heads vs d_head、GQA 下 K/V 总维度
 - [x] W1D3: RoPE 旋转位置编码 (配对旋转、复数视角、相对性恒等式、外推性与 NTK/YaRN) + numpy 手写验证
 - [x] W1D4: RMSNorm 与 SwiGLU (为何去均值、三投影形状、d_ff=8/3·d_model 参数平衡、silu 门控) + numpy 手写验证
+- [x] W1D5: 词表与 Tokenizer (BPE 贪心最长匹配、SentencePiece BPE/Unigram、LLaMA-3 merged BPE 128k、byte fallback) + tiktoken 观察
+- [x] W1D5 追加答疑: Unigram LM 公式与 Viterbi (Dynamic Programming, 动态规划) 切分、EM (Expectation-Maximization, 期望最大化) 训练剪枝
 
 ## 下次计划
-- [ ] W1D5: 词表与 tokenizer (BPE、SentencePiece、llama3 merged BPE) — 用 tiktoken 观察 tokenize 结果
+- [ ] W1D6: 采样 (temperature、top-k、top-p、repetition penalty、greedy) — 手写 top-k/top-p 采样器
 
 ## 已解答疑问
 - [x] 为什么 Q 要重算而 KV 可以缓存? → Q 是提问每次不同; K/V 只依赖自身输入, 建好不变
